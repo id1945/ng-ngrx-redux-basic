@@ -1,0 +1,1379 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: WKF
+host: localhost:10010
+basePath: /api
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  "/impersonate/login":
+    x-swagger-router-controller: employees
+    get:
+      description: employees
+      operationId: confirmLoginEmployee
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+
+  "/impersonate/logout":
+    x-swagger-router-controller: employees
+    get:
+      description: confirm employees
+      operationId: confirmLogoutEmployee
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+
+  "/me":
+    x-swagger-router-controller: me
+    get:
+      description: me
+      operationId: me
+      responses:
+        "200":
+          description: OKsetting/tenant
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+    put:
+      operationId: putProfile
+      parameters:
+        - in: "body"
+          name: employeeProfile
+          description: The employee to create.
+          required: true
+          schema:
+            type: object
+            properties:
+              mail_address_for_contact_address:
+                type: string
+              file:
+                type: string
+      responses:
+        200:
+          description: Created
+
+  "/me/notify-setting":
+    x-swagger-router-controller: notify-setting
+    get:
+      description: getNotifySetting
+      operationId: getNotifySetting
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+    put:
+      operationId: saveNotifySetting
+      parameters:
+        - in: "body"
+          name: notify
+          description: The application to create.
+          required: true
+          schema:
+            type: object
+            properties:
+              pushNoFlag:
+                type: integer
+              mailNoFlag:
+                type: integer
+              businessChatNoFlag:
+                type: integer
+              update_time:
+                type: string
+      responses:
+        200:
+          description: Created
+
+  "/error400":
+    x-swagger-router-controller: i18n
+    get:
+      description: error400
+      operationId: error400depart
+
+      responses:
+        "400":
+          description: OK
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+
+  "/me/avatar":
+    x-swagger-router-controller: avatars
+    get:
+      description: getAvatar
+      operationId: getAvatar
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+
+  "/company/avatar":
+    x-swagger-router-controller: company-basic
+    get:
+      description: getCompanyAvatar
+      operationId: getCompanyAvatar
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+
+  "/api/boxes/blobs/{id}":
+    x-swagger-router-controller: company-basic
+    get:
+      description: getImageFile
+      operationId: getImageFile
+      parameters:
+        - name: id
+          in: "path"
+          description: form id
+          required: true
+          type: number
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+
+  "/me/completed-applications":
+    x-swagger-router-controller: approvals
+    get:
+      description: getCompletedApprovalList
+      operationId: getCompletedApprovalList
+      responses:
+        "200":
+          description: OK
+          headers:
+            count:
+              type: string
+              description: number of items
+        "401":
+          description: "401"
+        "403":
+          description: "403"
+        "500":
+          description: "500"
+
+  "/me/waiting-applications":
+    x-swagger-router-controller: approvals
+    get:
+      description: getWaitingApprovalList
+      operationId: getWaitingApprovalList
+      responses:
+        "200":
+          description: OK
+          headers:
+            count:
+              type: string
+              description: number of items
+        "401":
+          description: "401"
+        "403":
+          description: "403"
+        "500":
+          description: "500"
+
+  "/me/applications":
+    x-swagger-router-controller: applications
+    get:
+      description: return applications
+      operationId: applications
+      responses:
+        "200":
+          description: OK
+          headers:
+            count:
+              type: string
+              description: number of items
+        "401":
+          description: "401"
+        "403":
+          description: "403"
+        "500":
+          description: "500"
+
+  "/me/attribute":
+    x-swagger-router-controller: licenses
+    get:
+      description: getLicensesList
+      operationId: getLicensesList
+      responses:
+        "200":
+          description: OK
+          headers:
+            count:
+              type: string
+              description: number of items
+        "401":
+          description: "401"
+        "403":
+          description: "403"
+        "500":
+          description: "500"
+
+  "/init-tenant":
+    x-swagger-router-controller: tenant
+    post:
+      operationId: postTenant
+      parameters:
+        - in: "body"
+          name: application
+          description: The application to create.
+          required: true
+          schema:
+            type: object
+            properties:
+              access_token:
+                type: string
+              employeeCode:
+                type: string
+      responses:
+        200:
+          description: Created
+
+
+  "/application-forms/request-form-template":
+    x-swagger-router-controller: application-popup-tree-file
+    get:
+      description: getApplicationPopupTreeFile
+      operationId: getApplicationPopupTreeFile
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+
+  "/application-forms/request-form-template/{fid}":
+    x-swagger-router-controller: application-forms
+    get:
+      description: getAppFormTemplate
+      operationId: getAppFormTemplate
+      parameters:
+        - name: fid
+          in: "path"
+          description: form id
+          required: true
+          type: number
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+
+
+  "/employees":
+    x-swagger-router-controller: employees
+    get:
+      description: return employee list.
+      operationId: getEmployees
+      responses:
+        "200":
+          description: OK
+
+    post:
+      description: create employee
+      operationId: postEmployeeDetail
+      parameters:
+        - in: "body"
+          name: postEmployee
+          description: The employee to create.
+          required: true
+          schema:
+            type: object
+            properties:
+              employee_external_code:
+                type: string
+              family_name:
+                type: string
+              last_name:
+                type: string
+              family_name_kana:
+                type: string
+              last_name_kana:
+                type: string
+              corporate_email_address:
+                type: string
+              contact_email_address:
+                type: string
+              update_time:
+                type: string
+              role_flag:
+                type: string
+              license_granting_status_id:
+                type: integer
+              license_lock_flag:
+                type: string
+              department_employee:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    dept_external_code:
+                      type: string
+                    dept_name:
+                        type: string
+      responses:
+        200:
+          description: OK
+    put:
+      description: update employee
+      operationId: putEmployeeDetail
+      parameters:
+        - in: "body"
+          name: postEmployee
+          description: The employee to create.
+          required: true
+          schema:
+            type: object
+            properties:
+              employee_id:
+                type: integer
+              employee_external_code:
+                type: string
+              family_name:
+                type: string
+              last_name:
+                type: string
+              family_name_kana:
+                type: string
+              last_name_kana:
+                type: string
+              corporate_email_address:
+                type: string
+              contact_email_address:
+                type: string
+              update_time:
+                type: string
+              role_flag:
+                type: string
+              license_granting_status_id:
+                type: integer
+              license_lock_flag:
+                type: string
+              department_employee:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    dept_external_code:
+                      type: string
+                    dept_name:
+                        type: string
+      responses:
+        200:
+          description: OK
+
+  "/employees/key":
+    x-swagger-router-controller: employees
+    get:
+      description: return employee list.
+      operationId: getEmployeesInfo
+      responses:
+        "200":
+          description: OK  
+  "/employees/by-keyword":
+    x-swagger-router-controller: employees
+    get:
+      description: return employee detail.
+      operationId: getSearch
+      responses:
+        "200":
+          description: OK
+
+  "/employees/{employeeId}":
+    x-swagger-router-controller: employees
+    get:
+      description: return employee detail.
+      operationId: getEmployeeId
+      parameters:
+        - name: employeeId
+          in: "path"
+          description: employee id
+          required: true
+          type: number
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+
+    
+    delete:
+      description: Delete employee
+      operationId: deleteEmployee
+      parameters:
+        - name: employeeId
+          description: employeeId
+          in: path
+          type: number
+          required: true
+      responses:
+        "200":
+          description: Success
+
+  "/setting/{app_id}/applicaton_no":
+    x-swagger-router-controller: company-basic
+    get:
+      description: getCompanyResponse By Id
+      operationId: getCompanyResponse
+      parameters:
+        - name: app_id
+          in: "path"
+          description: company response
+          required: true
+          type: string
+      responses:
+        "200":
+          description: OK
+        default:
+          description: Error
+
+  "/setting/tenant":
+    x-swagger-router-controller: company-basic
+    get:
+      description: return company detail.
+      operationId: getCompanyInfor
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+    post:
+      description: post company
+      operationId: postCompany
+      parameters:
+        - in: "body"
+          name: postCompany
+          description: The create company.
+          required: true
+          schema:
+            type: object
+            properties:
+              GUID:
+                type: string
+              tenant_id:
+                type: string
+              tenant_name:
+                type: string
+              tenant_name_abbreviation:
+                type: string
+              fileupload_maxlimit:
+                type: number
+              list_item_cont:
+                type: number
+              business_start_time:
+                type: string
+              business_end_time:
+                type: string
+              update_time:
+                type: string
+              keihi_coordination_flag:
+                type: string
+              kintai_coordination_flag:
+                type: string
+      responses:
+        200:
+          description: OK
+
+  "/applications":
+    x-swagger-router-controller: applications
+    post:
+      operationId: postDraftApplication
+      parameters:
+        - in: "body"
+          name: application
+          description: The application to create.
+          required: true
+          schema:
+            type: object
+            properties:
+              application_form_id:
+                type: integer
+              subject:
+                type: string
+              application_date:
+                type: string
+              application_due_date:
+                type: string
+              application_route_id:
+                type: integer
+              setting_value_list:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    application_form_item_id:
+                      type: integer
+                    values:
+                      type: array
+                      items:
+                        type: string
+      responses:
+        200:
+          description: Created
+    put:
+      operationId: saveDraftUpdateApplication
+      responses:
+        200:
+          description: Created
+
+
+  "/applications/approve":
+    x-swagger-router-controller: approvals
+    post:
+      operationId: postApprovals
+      parameters:
+        -
+          name: value
+          in: body
+          description: The approvals to create.
+          required: true
+          schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  application_id:
+                    type: number
+                  update_time:
+                    type: string
+      responses:
+        200:
+          description: Created
+  "/logout":
+    x-swagger-router-controller: logout
+    post:
+      operationId: logout
+      parameters:
+        - in: "body"
+          name: application
+          description: The application to create.
+          required: true
+          schema:
+            type: object
+      responses:
+        200:
+          description: Logout
+  "/applications/{appId}/submit":
+    x-swagger-router-controller: applications
+    post:
+      operationId: postSubmitApplication
+      parameters:
+        - name: appId
+          in: "path"
+          description: application id
+          required: true
+          type: number
+        - in: "body"
+          name: application
+          description: The application to create.
+          required: true
+          schema:
+            type: object
+            properties:
+              application_form_id:
+                type: integer
+              subject:
+                type: string
+              application_date:
+                type: string
+              application_due_date:
+                type: string
+              application_route_id:
+                type: integer
+              setting_value_list:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    application_form_item_id:
+                      type: integer
+                    values:
+                      type: string
+      responses:
+        200:
+          description: Created
+    put:
+      operationId: putApplication
+      parameters:
+        - name: appId
+          in: "path"
+          description: application id
+          required: true
+          type: number
+        - in: "body"
+          name: application
+          description: The application to create.
+          required: true
+          schema:
+            type: object
+            properties:
+              application_form_id:
+                type: integer
+              subject:
+                type: string
+              application_date:
+                type: string
+              application_due_date:
+                type: string
+              application_route_id:
+                type: integer
+              applicant_comments:
+                type: string
+              update_time:
+                type: string
+              setting_value_list:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    application_form_item_id:
+                      type: integer
+                    values:
+                      type: array
+                      items:
+                        type: string
+      responses:
+        200:
+          description: Created
+
+  "/applications/{applicationid}/approve":
+    x-swagger-router-controller: approvals
+    put:
+      operationId: postSubmitCommentApprove
+      parameters:
+        - name: applicationid
+          in: "path"
+          description: application id
+          required: true
+          type: string
+        - in: query
+          name: comment
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+      responses:
+        200:
+          description: Created
+
+  "/applications/{applicationid}/reject":
+    x-swagger-router-controller: approvals
+    put:
+      operationId: postSubmitCommentReject
+      parameters:
+        - name: applicationid
+          in: "path"
+          description: application id
+          required: true
+          type: string
+        - in: query
+          name: comment
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+      responses:
+        200:
+          description: Created
+
+  "/applications/{applicationid}/return":
+    x-swagger-router-controller: approvals
+    put:
+      operationId: postSubmitCommentReturn
+      parameters:
+        - name: applicationid
+          in: "path"
+          description: application id
+          required: true
+          type: string
+        - in: query
+          name: comment
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+      responses:
+        200:
+          description: Created
+
+  "/applications/{appId}":
+    x-swagger-router-controller: applications
+    get:
+      description: detail application
+      operationId: detail
+      parameters:
+        - name: appId
+          in: "path"
+          description: application id
+          required: true
+          type: number
+      responses:
+        "200":
+          description: OK
+
+    delete:
+      description: Delete application
+      operationId: deleteApplication
+      parameters:
+        - name: appId
+          description: appId
+          in: path
+          type: number
+          required: true
+      responses:
+        "200":
+          description: Success
+
+
+  "/applications/{appId}/approvers":
+    x-swagger-router-controller: applications
+    get:
+      description: getApproverList
+      operationId: getApproverList
+      parameters:
+        - name: appId
+          in: "path"
+          description: application id
+          required: true
+          type: number
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: "401"
+        "403":
+          description: "403"
+        "500":
+          description: "500"
+
+
+  "/application-form-categories":
+    x-swagger-router-controller: application-form-categories
+    get:
+      description: getAppFormCategories
+      operationId: getAppFormCategories
+      responses:
+        "200":
+          description: OK
+
+  "/application-forms/application-form-item-type":
+    x-swagger-router-controller: application-forms
+    get:
+      description: getApplicationFormItemTypes
+      operationId: getApplicationFormItemTypes
+      responses:
+        "200":
+          description: OK
+
+  "/applications-form":
+    x-swagger-router-controller: application-forms
+    get:
+      description: return application form list.
+      operationId: getAppForms
+      responses:
+        "200":
+          description: OK
+          headers:
+            count:
+              type: string
+              description: number of items.
+    post:
+      operationId: postApplicationForm
+      responses:
+        200:
+          description: Created
+
+  "/application-forms/shortcut":
+    x-swagger-router-controller: application-forms
+    get:
+      description: return application form list.
+      operationId: getAppForms
+      responses:
+        "200":
+          description: OK
+          headers:
+            count:
+              type: string
+              description: number of items.
+
+  "/application-forms/{appFormId}":
+    x-swagger-router-controller: application-forms
+    get:
+      description: get application form detail
+      operationId: getAppForm
+      parameters:
+        - name: appFormId
+          in: "path"
+          description: appFormId
+          required: true
+          type: number
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+        default:
+          description: Error
+    delete:
+      description: Delete applications form
+      operationId: deleteAppForms
+      parameters:
+        - name: appFormId
+          description: appFormId
+          in: path
+          type: number
+          required: true
+      responses:
+        "200":
+          description: Success
+
+  "/applications-form/{appFormId}":
+    x-swagger-router-controller: application-forms
+    put:
+      operationId: putApplicationForm
+      parameters:
+        - name: appFormId
+          description: appFormId
+          in: path
+          type: number
+          required: true
+      responses:
+        200:
+          description: Created
+
+  "/application-forms/{appFormId}/approval-routes":
+    x-swagger-router-controller: application-forms
+    get:
+      description: get approval routes
+      operationId: getApprovalRoutes
+      parameters:
+        - name: appFormId
+          in: "path"
+          description: appFormId
+          required: true
+          type: number
+      responses:
+        "200":
+          description: OK
+        default:
+          description: Error
+
+  "/applications/{applicationid}/approval-route":
+    x-swagger-router-controller: approval-routes
+    get:
+      description: get approval route
+      operationId: getApprovalRoute
+      parameters:
+        - name: applicationid
+          in: "path"
+          description: applicationid
+          required: true
+          type: number
+      responses:
+        "200":
+          description: OK
+        default:
+          description: Error
+          
+  "/approval-routes/{approuteid}/direct-supervisor":
+    x-swagger-router-controller: approval-routes
+    get:
+      description: return employee list.
+      operationId: getApprovalSupervisor
+      parameters:
+        - name: approuteid
+          in: "path"
+          description: approuteid
+          required: true
+          type: number
+      responses:
+        "200":
+          description: OK
+          
+  "/approval-routes/{rid}":
+    x-swagger-router-controller: approval-routes
+    get:
+      description: get approval route
+      operationId: getApprovalDetail
+      parameters:
+        - name: rid
+          in: "path"
+          description: rid
+          required: true
+          type: number
+      responses:
+        "200":
+          description: OK
+        default:
+          description: Error
+    delete:
+      description: Delete approval route
+      operationId: deleteApprovalRoute
+      parameters:
+        - name: rid
+          description: rid
+          in: path
+          type: number
+          required: true
+      responses:
+        "200":
+          description: Success
+
+    put:
+      operationId: putApprovalRoute
+      parameters:
+        - name: rid
+          description: rid
+          in: path
+          type: number
+          required: true
+      responses:
+        200:
+          description: Created
+  
+  "/approval-routes-by-request-date":
+    x-swagger-router-controller: approval-routes
+    get:
+      description: return employee list.
+      operationId: getRequestApproval
+      responses:
+        "200":
+          description: OK 
+          
+  "/approval-route-categories":
+    x-swagger-router-controller: approval-routes
+    get:
+      description: Returns 'Hello' to the caller
+      operationId: getApprovalRouteCategories
+      parameters:
+        - name: name
+          in: query
+          description: The name of the person to whom to say hello
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  "/approval-routes":
+    x-swagger-router-controller: approval-routes
+    get:
+      description: Returns 'Hello' to the caller
+      operationId: approvalRouteList
+      parameters:
+        - name: name
+          in: query
+          description: The name of the person to whom to say hello
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+    post:
+      operationId: postApprovalRoute
+      responses:
+        200:
+          description: Created
+
+  "/departments":
+    x-swagger-router-controller: departments
+    get:
+      description: department list.
+      operationId: getDepartment
+      responses:
+        "200":
+          description: OK
+
+    post:
+      operationId: createDepartment
+      parameters:
+        - in: "body"
+          name: createDepartment
+          description: The department to create.
+          required: true
+          schema:
+            type: object
+            properties:
+              dept_external_code:
+                type: string
+              dept_name:
+                type: string
+              dept_name_abbreviation:
+                type: string
+      responses:
+        "200":
+          description: Success
+
+  "/departments/key_sort":
+    x-swagger-router-controller: departments
+    get:
+      description: returndepartment list.
+      operationId: getDepartmentSort
+      responses:
+        "200":
+          description: OK
+
+  "/departments/{id}":
+    x-swagger-router-controller: departments
+    get:
+      description: get Department By Id
+      operationId: getDepartmentById
+      parameters:
+        - name: id
+          in: "path"
+          description: approval route id
+          required: true
+          type: number
+      responses:
+        "200":
+          description: OK
+        default:
+          description: Error
+    delete:
+      description: Delete depart
+      operationId: deleteDepartment
+      parameters:
+        - name: id
+          description: Id
+          in: path
+          type: number
+          required: true
+      responses:
+        "200":
+          description: Success
+    put:
+      description: updateDepartment
+      operationId: updateDepartment
+      parameters:
+        - name: id
+          description: id
+          in: path
+          type: number
+          required: true
+        - in: "body"
+          name: updateDepartment
+          description: The department to update.
+          required: true
+          schema:
+            type: object
+            properties:
+              dept_external_code:
+                type: string
+              dept_name:
+                type: string
+              dept_name_abbreviation:
+                type: string
+      responses:
+        "200":
+          description: Success
+
+  "/applications/{applicationid}/history":
+    x-swagger-router-controller: application-history
+    get:
+      description: Get historys
+      operationId: getList
+      parameters:
+        - name: applicationid
+          in: "path"
+          description: applicationid
+          required: true
+          type: number
+      responses:
+        "200":
+          description: Success
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  "/datalink-history":
+    x-swagger-router-controller: datalink
+    get:
+      description: return datalink list.
+      operationId: getDatalink
+      responses:
+        "200":
+          description: OK
+
+  "/me/application-forms-most-recent-used":
+    x-swagger-router-controller:  employees
+    get:
+      description: most recent applications.
+      operationId: getMostRecentAppForms
+      responses:
+        "200":
+          description: OK
+        default:
+          description: Error
+
+  "/approval-routes/{approval_route_id}/application-forms":
+    x-swagger-router-controller: approval-routes
+    get:
+      description: detail application
+      operationId: getApprovalRouteAppForms
+      parameters:
+        - name: approval_route_id
+          in: "path"
+          description: approval route id
+          required: true
+          type: number
+      responses:
+        "200":
+          description: OK
+
+  "/approval-routes/{approval_route_id}/departments":
+    x-swagger-router-controller: approval-routes
+    get:
+      description: detail application
+      operationId: getApprovalRouteDepartment
+      parameters:
+        - name: approval_route_id
+          in: "path"
+          description: approval route id
+          required: true
+          type: number
+      responses:
+        "200":
+          description: OK
+
+
+  "/auth/permission-matrix":
+      x-swagger-router-controller:  permission-matrix
+      get:
+        description: check permission user matrix.
+        operationId: permissionmatrix
+        responses:
+          "200":
+            description: OK
+          default:
+            description: Error
+
+  "/employees/{empId}/avatar":
+    x-swagger-router-controller:  avatars
+    get:
+      description: avata by employee id.
+      operationId: getAvatarById
+      parameters:
+        - name: empId
+          in: "path"
+          description: employee id
+          required: true
+          type: number
+      responses:
+        "200":
+          description: OK
+        default:
+          description: Error
+  "/applications/{applicationid}/takeback":
+    x-swagger-router-controller: applications
+    put:
+      operationId: postTakeBack
+      parameters:
+        - name: applicationid
+          in: "path"
+          description: application id
+          required: true
+          type: number
+        - in: "body"
+          name: postCancel
+          description: postCancel.
+          required: true
+          schema:
+            type: object
+            properties:
+              comment:
+                type: string
+      responses:
+        200:
+          description: Created
+
+  "/applications/{applicationid}/cancel":
+    x-swagger-router-controller: applications
+    put:
+      operationId: postCancel
+      parameters:
+        - name: applicationid
+          in: "path"
+          description: application id
+          required: true
+          type: number
+        - in: "body"
+          name: postCancel
+          description: postCancel.
+          required: true
+          schema:
+            type: object
+            properties:
+              comment:
+                type: string
+      responses:
+        200:
+          description: Created
+
+  "/files/{fileId}":
+    x-swagger-router-controller: files
+    delete:
+      description: Delete file
+      operationId: deleteFilesInBizsky
+      parameters:
+        - name: fileId
+          description: fileId
+          in: path
+          type: string
+          required: true
+      responses:
+        "200":
+          description: Success
+  "/import":
+    x-swagger-router-controller: files
+    post:
+      operationId: postImportFile
+      parameters:
+        - in: "body"
+          name: application
+          description: The application to create.
+          required: true
+          schema:
+            type: object
+      responses:
+        200:
+          description: Logout
+  "/upload/file":
+    x-swagger-router-controller: files
+    post:
+      summary: Uploads a file.
+      consumes:
+        - multipart/form-data
+      operationId: upload
+      parameters:
+        - in: formData
+          name: upfile
+          type: file
+          required: true
+          description: The file to upload.
+      responses:
+        200:
+          description: Created
+
+  '/datalink-history/{historyID}':
+    x-swagger-router-controller: datalink
+    get:
+      description: datalink download
+      operationId: downLoadDataLink
+      parameters:
+        - name: historyID
+          in: path
+          description: history ID
+          required: true
+          type: number
+      responses:
+        '200':
+          description: OK
+          
+  '/upload/fileconfigure':
+    x-swagger-router-controller: files
+    get:
+      description: file
+      operationId: getfileSize
+      responses:
+        '200':
+          description: OK
+
+  '/files':
+    x-swagger-router-controller: files
+    post:
+      summary: Uploads a file datalink.
+      consumes:
+        - multipart/form-data
+      operationId: uploadDataLink
+      parameters:
+        - in: formData
+          name: upfile
+          type: file
+          required: true
+          description: The file to upload datalink.
+      responses:
+        '200':
+          description: OK
+    get:
+      description: get list files from bizsky.
+      operationId: getFiles
+      responses:
+        "200":
+          description: OK
+
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  HelloWorldResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string

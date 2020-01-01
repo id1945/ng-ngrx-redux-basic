@@ -1,0 +1,122 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: WKF
+host: localhost:10010
+basePath: /api
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  "/departments":
+    x-swagger-router-controller: departments
+    get:
+      description: department list.
+      operationId: getDepartment
+      responses:
+        "200":
+          description: OK
+
+    post:
+      operationId: createDepartment
+      parameters:
+        - in: "body"
+          name: createDepartment
+          description: The department to create.
+          required: true
+          schema:
+            type: object
+            properties:
+              dept_external_code:
+                type: string
+              dept_name:
+                type: string
+              dept_name_abbreviation:
+                type: string
+      responses:
+        "200":
+          description: Success
+
+  "/departments/key_sort":
+    x-swagger-router-controller: departments
+    get:
+      description: returndepartment list.
+      operationId: getDepartmentSort
+      responses:
+        "200":
+          description: OK
+
+  "/departments/{id}":
+    x-swagger-router-controller: departments
+    get:
+      description: get Department By Id
+      operationId: getDepartmentById
+      parameters:
+        - name: id
+          in: "path"
+          description: approval route id
+          required: true
+          type: number
+      responses:
+        "200":
+          description: OK
+        default:
+          description: Error
+    delete:
+      description: Delete depart
+      operationId: deleteDepartment
+      parameters:
+        - name: id
+          description: Id
+          in: path
+          type: number
+          required: true
+      responses:
+        "200":
+          description: Success
+    put:
+      description: updateDepartment
+      operationId: updateDepartment
+      parameters:
+        - name: id
+          description: id
+          in: path
+          type: number
+          required: true
+        - in: "body"
+          name: updateDepartment
+          description: The department to update.
+          required: true
+          schema:
+            type: object
+            properties:
+              dept_external_code:
+                type: string
+              dept_name:
+                type: string
+              dept_name_abbreviation:
+                type: string
+      responses:
+        "200":
+          description: Success
+
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  HelloWorldResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string

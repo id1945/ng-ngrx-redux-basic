@@ -1,3 +1,7 @@
+## Demo 
+```You need to install swagger to run this demo```
+https://id1945.github.io/ng-ngrx-redux-basic/department
+
 ### Clone project
 ```
 git clone https://github.com/id1945/ng-ngrx-redux-basic.git
